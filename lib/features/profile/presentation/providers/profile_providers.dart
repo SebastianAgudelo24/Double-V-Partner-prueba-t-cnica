@@ -171,7 +171,7 @@ class ProfileState {
     return ProfileState(
       user: user ?? this.user,
       isLoading: isLoading ?? this.isLoading,
-      error: error ?? this.error,
+      error: error, // Permitir pasar null explícitamente
     );
   }
 

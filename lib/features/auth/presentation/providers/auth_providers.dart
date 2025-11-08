@@ -163,7 +163,7 @@ class AuthState {
     return AuthState(
       user: user ?? this.user,
       isLoading: isLoading ?? this.isLoading,
-      error: error ?? this.error,
+      error: error, // Permitir pasar null explícitamente
       isAuthenticated: isAuthenticated ?? this.isAuthenticated,
     );
   }

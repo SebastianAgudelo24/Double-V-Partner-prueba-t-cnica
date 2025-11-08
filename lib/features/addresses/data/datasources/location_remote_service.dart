@@ -36,7 +36,12 @@ class LocationRemoteService {
     try {
       final response = await _dio.get(
         'https://api.countrystatecity.in/v1/countries/$countryCode/states',
-        options: Options(headers: {'X-CSCAPI-KEY': 'YOUR_API_KEY_HERE'}),
+        options: Options(
+          headers: {
+            'X-CSCAPI-KEY':
+                'ejZRVEV6T0pCdXd0SW1mdzZOZldCZjFyWm41emFlenFVZ28wRzBTSA==',
+          },
+        ),
       );
 
       if (response.statusCode == 200) {
@@ -63,7 +68,12 @@ class LocationRemoteService {
     try {
       final response = await _dio.get(
         'https://api.countrystatecity.in/v1/countries/$countryCode/states/$stateCode/cities',
-        options: Options(headers: {'X-CSCAPI-KEY': 'YOUR_API_KEY_HERE'}),
+        options: Options(
+          headers: {
+            'X-CSCAPI-KEY':
+                'ejZRVEV6T0pCdXd0SW1mdzZOZldCZjFyWm41emFlenFVZ28wRzBTSA==',
+          },
+        ),
       );
 
       if (response.statusCode == 200) {

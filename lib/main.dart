@@ -10,7 +10,6 @@ import 'core/errors/global_error_handler.dart';
 import 'core/di/injection.dart';
 
 void main() {
-  // Ejecutar todo en un único zone para evitar "Zone mismatch"
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
@@ -51,7 +50,7 @@ class MyApp extends ConsumerWidget {
         textTheme: Theme.of(
           context,
         ).textTheme.apply(fontFamily: 'Manrope', fontSizeFactor: 1),
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
           scrolledUnderElevation: 0,

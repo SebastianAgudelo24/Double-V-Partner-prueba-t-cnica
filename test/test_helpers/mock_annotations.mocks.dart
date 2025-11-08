@@ -3,23 +3,45 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
+import 'package:dvp_prueba_tecnica_flutter/features/addresses/data/datasources/location_datasource.dart'
+    as _i12;
 import 'package:dvp_prueba_tecnica_flutter/features/addresses/domain/entities/city.dart'
-    as _i9;
+    as _i11;
 import 'package:dvp_prueba_tecnica_flutter/features/addresses/domain/entities/country.dart'
-    as _i7;
+    as _i9;
 import 'package:dvp_prueba_tecnica_flutter/features/addresses/domain/entities/state.dart'
-    as _i8;
+    as _i10;
 import 'package:dvp_prueba_tecnica_flutter/features/addresses/domain/repositories/location_repository.dart'
-    as _i6;
+    as _i8;
+import 'package:dvp_prueba_tecnica_flutter/features/auth/data/datasources/auth_datasource.dart'
+    as _i7;
 import 'package:dvp_prueba_tecnica_flutter/features/auth/domain/entities/user.dart'
     as _i2;
 import 'package:dvp_prueba_tecnica_flutter/features/auth/domain/repositories/auth_repository.dart'
     as _i4;
+import 'package:dvp_prueba_tecnica_flutter/features/auth/domain/use_cases/get_current_user_use_case.dart'
+    as _i15;
+import 'package:dvp_prueba_tecnica_flutter/features/auth/domain/use_cases/is_authenticated_use_case.dart'
+    as _i17;
+import 'package:dvp_prueba_tecnica_flutter/features/auth/domain/use_cases/logout_use_case.dart'
+    as _i16;
+import 'package:dvp_prueba_tecnica_flutter/features/auth/domain/use_cases/register_user_use_case.dart'
+    as _i14;
+import 'package:dvp_prueba_tecnica_flutter/features/auth/domain/use_cases/update_user_use_case.dart'
+    as _i18;
 import 'package:dvp_prueba_tecnica_flutter/features/profile/domain/repositories/profile_repository.dart'
-    as _i10;
-import 'package:flutter/foundation.dart' as _i11;
+    as _i5;
+import 'package:dvp_prueba_tecnica_flutter/features/profile/domain/use_cases/add_address_to_profile_use_case.dart'
+    as _i21;
+import 'package:dvp_prueba_tecnica_flutter/features/profile/domain/use_cases/get_user_profile_use_case.dart'
+    as _i19;
+import 'package:dvp_prueba_tecnica_flutter/features/profile/domain/use_cases/refresh_profile_use_case.dart'
+    as _i22;
+import 'package:dvp_prueba_tecnica_flutter/features/profile/domain/use_cases/update_user_profile_use_case.dart'
+    as _i20;
+import 'package:flutter/foundation.dart' as _i13;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -75,6 +97,18 @@ class _FakeMacOsOptions_6 extends _i1.SmartFake implements _i3.MacOsOptions {
     : super(parent, parentInvocation);
 }
 
+class _FakeAuthRepository_7 extends _i1.SmartFake
+    implements _i4.AuthRepository {
+  _FakeAuthRepository_7(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeProfileRepository_8 extends _i1.SmartFake
+    implements _i5.ProfileRepository {
+  _FakeProfileRepository_8(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -84,32 +118,32 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
   }
 
   @override
-  _i5.Future<_i2.User?> getCurrentUser() =>
+  _i6.Future<_i2.User?> getCurrentUser() =>
       (super.noSuchMethod(
             Invocation.method(#getCurrentUser, []),
-            returnValue: _i5.Future<_i2.User?>.value(),
+            returnValue: _i6.Future<_i2.User?>.value(),
           )
-          as _i5.Future<_i2.User?>);
+          as _i6.Future<_i2.User?>);
 
   @override
-  _i5.Future<void> logout() =>
+  _i6.Future<void> logout() =>
       (super.noSuchMethod(
             Invocation.method(#logout, []),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<bool> isAuthenticated() =>
+  _i6.Future<bool> isAuthenticated() =>
       (super.noSuchMethod(
             Invocation.method(#isAuthenticated, []),
-            returnValue: _i5.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
           )
-          as _i5.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  _i5.Future<_i2.User> registerUser({
+  _i6.Future<_i2.User> registerUser({
     required String? name,
     required String? surname,
     required DateTime? birthDate,
@@ -120,7 +154,7 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
               #surname: surname,
               #birthDate: birthDate,
             }),
-            returnValue: _i5.Future<_i2.User>.value(
+            returnValue: _i6.Future<_i2.User>.value(
               _FakeUser_0(
                 this,
                 Invocation.method(#registerUser, [], {
@@ -131,85 +165,195 @@ class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
               ),
             ),
           )
-          as _i5.Future<_i2.User>);
+          as _i6.Future<_i2.User>);
 
   @override
-  _i5.Future<void> updateUser(_i2.User? user) =>
+  _i6.Future<void> updateUser(_i2.User? user) =>
       (super.noSuchMethod(
             Invocation.method(#updateUser, [user]),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
+}
+
+/// A class which mocks [AuthLocalDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthLocalDataSource extends _i1.Mock
+    implements _i7.AuthLocalDataSource {
+  MockAuthLocalDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<void> saveUser(_i2.User? user) =>
+      (super.noSuchMethod(
+            Invocation.method(#saveUser, [user]),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
+          )
+          as _i6.Future<void>);
+
+  @override
+  _i6.Future<_i2.User?> getUser() =>
+      (super.noSuchMethod(
+            Invocation.method(#getUser, []),
+            returnValue: _i6.Future<_i2.User?>.value(),
+          )
+          as _i6.Future<_i2.User?>);
+
+  @override
+  _i6.Future<void> clearUserData() =>
+      (super.noSuchMethod(
+            Invocation.method(#clearUserData, []),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
+          )
+          as _i6.Future<void>);
+
+  @override
+  _i6.Future<bool> hasUser() =>
+      (super.noSuchMethod(
+            Invocation.method(#hasUser, []),
+            returnValue: _i6.Future<bool>.value(false),
+          )
+          as _i6.Future<bool>);
+
+  @override
+  _i6.Future<_i2.User> registerUser({
+    required String? name,
+    required String? surname,
+    required DateTime? birthDate,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#registerUser, [], {
+              #name: name,
+              #surname: surname,
+              #birthDate: birthDate,
+            }),
+            returnValue: _i6.Future<_i2.User>.value(
+              _FakeUser_0(
+                this,
+                Invocation.method(#registerUser, [], {
+                  #name: name,
+                  #surname: surname,
+                  #birthDate: birthDate,
+                }),
+              ),
+            ),
+          )
+          as _i6.Future<_i2.User>);
 }
 
 /// A class which mocks [LocationRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockLocationRepository extends _i1.Mock
-    implements _i6.LocationRepository {
+    implements _i8.LocationRepository {
   MockLocationRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<List<_i7.Country>> getCountries() =>
+  _i6.Future<List<_i9.Country>> getCountries() =>
       (super.noSuchMethod(
             Invocation.method(#getCountries, []),
-            returnValue: _i5.Future<List<_i7.Country>>.value(<_i7.Country>[]),
+            returnValue: _i6.Future<List<_i9.Country>>.value(<_i9.Country>[]),
           )
-          as _i5.Future<List<_i7.Country>>);
+          as _i6.Future<List<_i9.Country>>);
 
   @override
-  _i5.Future<List<_i8.AddressState>> getStatesByCountry(String? countryCode) =>
+  _i6.Future<List<_i10.AddressState>> getStatesByCountry(String? countryCode) =>
       (super.noSuchMethod(
             Invocation.method(#getStatesByCountry, [countryCode]),
-            returnValue: _i5.Future<List<_i8.AddressState>>.value(
-              <_i8.AddressState>[],
+            returnValue: _i6.Future<List<_i10.AddressState>>.value(
+              <_i10.AddressState>[],
             ),
           )
-          as _i5.Future<List<_i8.AddressState>>);
+          as _i6.Future<List<_i10.AddressState>>);
 
   @override
-  _i5.Future<List<_i9.City>> getCitiesByState(
+  _i6.Future<List<_i11.City>> getCitiesByState(
     String? countryCode,
     String? stateCode,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#getCitiesByState, [countryCode, stateCode]),
-            returnValue: _i5.Future<List<_i9.City>>.value(<_i9.City>[]),
+            returnValue: _i6.Future<List<_i11.City>>.value(<_i11.City>[]),
           )
-          as _i5.Future<List<_i9.City>>);
+          as _i6.Future<List<_i11.City>>);
+}
+
+/// A class which mocks [LocationDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLocationDataSource extends _i1.Mock
+    implements _i12.LocationDataSource {
+  MockLocationDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<List<_i9.Country>> fetchCountries() =>
+      (super.noSuchMethod(
+            Invocation.method(#fetchCountries, []),
+            returnValue: _i6.Future<List<_i9.Country>>.value(<_i9.Country>[]),
+          )
+          as _i6.Future<List<_i9.Country>>);
+
+  @override
+  _i6.Future<List<_i10.AddressState>> fetchStatesByCountry(
+    String? countryCode,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#fetchStatesByCountry, [countryCode]),
+            returnValue: _i6.Future<List<_i10.AddressState>>.value(
+              <_i10.AddressState>[],
+            ),
+          )
+          as _i6.Future<List<_i10.AddressState>>);
+
+  @override
+  _i6.Future<List<_i11.City>> fetchCitiesByState(
+    String? countryCode,
+    String? stateCode,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#fetchCitiesByState, [countryCode, stateCode]),
+            returnValue: _i6.Future<List<_i11.City>>.value(<_i11.City>[]),
+          )
+          as _i6.Future<List<_i11.City>>);
 }
 
 /// A class which mocks [ProfileRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockProfileRepository extends _i1.Mock implements _i10.ProfileRepository {
+class MockProfileRepository extends _i1.Mock implements _i5.ProfileRepository {
   MockProfileRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.User?> getUserProfile() =>
+  _i6.Future<_i2.User?> getUserProfile() =>
       (super.noSuchMethod(
             Invocation.method(#getUserProfile, []),
-            returnValue: _i5.Future<_i2.User?>.value(),
+            returnValue: _i6.Future<_i2.User?>.value(),
           )
-          as _i5.Future<_i2.User?>);
+          as _i6.Future<_i2.User?>);
 
   @override
-  _i5.Future<_i2.User> updateUserProfile(_i2.User? user) =>
+  _i6.Future<_i2.User> updateUserProfile(_i2.User? user) =>
       (super.noSuchMethod(
             Invocation.method(#updateUserProfile, [user]),
-            returnValue: _i5.Future<_i2.User>.value(
+            returnValue: _i6.Future<_i2.User>.value(
               _FakeUser_0(this, Invocation.method(#updateUserProfile, [user])),
             ),
           )
-          as _i5.Future<_i2.User>);
+          as _i6.Future<_i2.User>);
 
   @override
-  _i5.Future<_i2.User> addAddressToProfile({
+  _i6.Future<_i2.User> addAddressToProfile({
     required String? country,
     required String? state,
     required String? city,
@@ -224,7 +368,7 @@ class MockProfileRepository extends _i1.Mock implements _i10.ProfileRepository {
               #streetAddress: streetAddress,
               #setAsDefault: setAsDefault,
             }),
-            returnValue: _i5.Future<_i2.User>.value(
+            returnValue: _i6.Future<_i2.User>.value(
               _FakeUser_0(
                 this,
                 Invocation.method(#addAddressToProfile, [], {
@@ -237,15 +381,15 @@ class MockProfileRepository extends _i1.Mock implements _i10.ProfileRepository {
               ),
             ),
           )
-          as _i5.Future<_i2.User>);
+          as _i6.Future<_i2.User>);
 
   @override
-  _i5.Future<_i2.User?> refreshProfile() =>
+  _i6.Future<_i2.User?> refreshProfile() =>
       (super.noSuchMethod(
             Invocation.method(#refreshProfile, []),
-            returnValue: _i5.Future<_i2.User?>.value(),
+            returnValue: _i6.Future<_i2.User?>.value(),
           )
-          as _i5.Future<_i2.User?>);
+          as _i6.Future<_i2.User?>);
 }
 
 /// A class which mocks [FlutterSecureStorage].
@@ -323,7 +467,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   void registerListener({
     required String? key,
-    required _i11.ValueChanged<String?>? listener,
+    required _i13.ValueChanged<String?>? listener,
   }) => super.noSuchMethod(
     Invocation.method(#registerListener, [], {#key: key, #listener: listener}),
     returnValueForMissingStub: null,
@@ -332,7 +476,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   void unregisterListener({
     required String? key,
-    required _i11.ValueChanged<String?>? listener,
+    required _i13.ValueChanged<String?>? listener,
   }) => super.noSuchMethod(
     Invocation.method(#unregisterListener, [], {
       #key: key,
@@ -355,7 +499,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   );
 
   @override
-  _i5.Future<void> write({
+  _i6.Future<void> write({
     required String? key,
     required String? value,
     _i3.IOSOptions? iOptions,
@@ -376,13 +520,13 @@ class MockFlutterSecureStorage extends _i1.Mock
               #mOptions: mOptions,
               #wOptions: wOptions,
             }),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<String?> read({
+  _i6.Future<String?> read({
     required String? key,
     _i3.IOSOptions? iOptions,
     _i3.AndroidOptions? aOptions,
@@ -401,12 +545,12 @@ class MockFlutterSecureStorage extends _i1.Mock
               #mOptions: mOptions,
               #wOptions: wOptions,
             }),
-            returnValue: _i5.Future<String?>.value(),
+            returnValue: _i6.Future<String?>.value(),
           )
-          as _i5.Future<String?>);
+          as _i6.Future<String?>);
 
   @override
-  _i5.Future<bool> containsKey({
+  _i6.Future<bool> containsKey({
     required String? key,
     _i3.IOSOptions? iOptions,
     _i3.AndroidOptions? aOptions,
@@ -425,12 +569,12 @@ class MockFlutterSecureStorage extends _i1.Mock
               #mOptions: mOptions,
               #wOptions: wOptions,
             }),
-            returnValue: _i5.Future<bool>.value(false),
+            returnValue: _i6.Future<bool>.value(false),
           )
-          as _i5.Future<bool>);
+          as _i6.Future<bool>);
 
   @override
-  _i5.Future<void> delete({
+  _i6.Future<void> delete({
     required String? key,
     _i3.IOSOptions? iOptions,
     _i3.AndroidOptions? aOptions,
@@ -449,13 +593,13 @@ class MockFlutterSecureStorage extends _i1.Mock
               #mOptions: mOptions,
               #wOptions: wOptions,
             }),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<Map<String, String>> readAll({
+  _i6.Future<Map<String, String>> readAll({
     _i3.IOSOptions? iOptions,
     _i3.AndroidOptions? aOptions,
     _i3.LinuxOptions? lOptions,
@@ -472,14 +616,14 @@ class MockFlutterSecureStorage extends _i1.Mock
               #mOptions: mOptions,
               #wOptions: wOptions,
             }),
-            returnValue: _i5.Future<Map<String, String>>.value(
+            returnValue: _i6.Future<Map<String, String>>.value(
               <String, String>{},
             ),
           )
-          as _i5.Future<Map<String, String>>);
+          as _i6.Future<Map<String, String>>);
 
   @override
-  _i5.Future<void> deleteAll({
+  _i6.Future<void> deleteAll({
     _i3.IOSOptions? iOptions,
     _i3.AndroidOptions? aOptions,
     _i3.LinuxOptions? lOptions,
@@ -496,16 +640,319 @@ class MockFlutterSecureStorage extends _i1.Mock
               #mOptions: mOptions,
               #wOptions: wOptions,
             }),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<bool?> isCupertinoProtectedDataAvailable() =>
+  _i6.Future<bool?> isCupertinoProtectedDataAvailable() =>
       (super.noSuchMethod(
             Invocation.method(#isCupertinoProtectedDataAvailable, []),
-            returnValue: _i5.Future<bool?>.value(),
+            returnValue: _i6.Future<bool?>.value(),
           )
-          as _i5.Future<bool?>);
+          as _i6.Future<bool?>);
+}
+
+/// A class which mocks [RegisterUserUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRegisterUserUseCase extends _i1.Mock
+    implements _i14.RegisterUserUseCase {
+  MockRegisterUserUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.AuthRepository get repository =>
+      (super.noSuchMethod(
+            Invocation.getter(#repository),
+            returnValue: _FakeAuthRepository_7(
+              this,
+              Invocation.getter(#repository),
+            ),
+          )
+          as _i4.AuthRepository);
+
+  @override
+  _i6.Future<_i2.User> call({
+    required String? name,
+    required String? surname,
+    required DateTime? birthDate,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#call, [], {
+              #name: name,
+              #surname: surname,
+              #birthDate: birthDate,
+            }),
+            returnValue: _i6.Future<_i2.User>.value(
+              _FakeUser_0(
+                this,
+                Invocation.method(#call, [], {
+                  #name: name,
+                  #surname: surname,
+                  #birthDate: birthDate,
+                }),
+              ),
+            ),
+          )
+          as _i6.Future<_i2.User>);
+}
+
+/// A class which mocks [GetCurrentUserUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetCurrentUserUseCase extends _i1.Mock
+    implements _i15.GetCurrentUserUseCase {
+  MockGetCurrentUserUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.AuthRepository get repository =>
+      (super.noSuchMethod(
+            Invocation.getter(#repository),
+            returnValue: _FakeAuthRepository_7(
+              this,
+              Invocation.getter(#repository),
+            ),
+          )
+          as _i4.AuthRepository);
+
+  @override
+  _i6.Future<_i2.User?> call() =>
+      (super.noSuchMethod(
+            Invocation.method(#call, []),
+            returnValue: _i6.Future<_i2.User?>.value(),
+          )
+          as _i6.Future<_i2.User?>);
+}
+
+/// A class which mocks [LogoutUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLogoutUseCase extends _i1.Mock implements _i16.LogoutUseCase {
+  MockLogoutUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.AuthRepository get repository =>
+      (super.noSuchMethod(
+            Invocation.getter(#repository),
+            returnValue: _FakeAuthRepository_7(
+              this,
+              Invocation.getter(#repository),
+            ),
+          )
+          as _i4.AuthRepository);
+
+  @override
+  _i6.Future<void> call() =>
+      (super.noSuchMethod(
+            Invocation.method(#call, []),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
+          )
+          as _i6.Future<void>);
+}
+
+/// A class which mocks [IsAuthenticatedUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIsAuthenticatedUseCase extends _i1.Mock
+    implements _i17.IsAuthenticatedUseCase {
+  MockIsAuthenticatedUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.AuthRepository get repository =>
+      (super.noSuchMethod(
+            Invocation.getter(#repository),
+            returnValue: _FakeAuthRepository_7(
+              this,
+              Invocation.getter(#repository),
+            ),
+          )
+          as _i4.AuthRepository);
+
+  @override
+  _i6.Future<bool> call() =>
+      (super.noSuchMethod(
+            Invocation.method(#call, []),
+            returnValue: _i6.Future<bool>.value(false),
+          )
+          as _i6.Future<bool>);
+}
+
+/// A class which mocks [UpdateUserUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUpdateUserUseCase extends _i1.Mock implements _i18.UpdateUserUseCase {
+  MockUpdateUserUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.AuthRepository get repository =>
+      (super.noSuchMethod(
+            Invocation.getter(#repository),
+            returnValue: _FakeAuthRepository_7(
+              this,
+              Invocation.getter(#repository),
+            ),
+          )
+          as _i4.AuthRepository);
+
+  @override
+  _i6.Future<void> call(_i2.User? user) =>
+      (super.noSuchMethod(
+            Invocation.method(#call, [user]),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
+          )
+          as _i6.Future<void>);
+}
+
+/// A class which mocks [GetUserProfileUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetUserProfileUseCase extends _i1.Mock
+    implements _i19.GetUserProfileUseCase {
+  MockGetUserProfileUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.ProfileRepository get repository =>
+      (super.noSuchMethod(
+            Invocation.getter(#repository),
+            returnValue: _FakeProfileRepository_8(
+              this,
+              Invocation.getter(#repository),
+            ),
+          )
+          as _i5.ProfileRepository);
+
+  @override
+  _i6.Future<_i2.User?> call() =>
+      (super.noSuchMethod(
+            Invocation.method(#call, []),
+            returnValue: _i6.Future<_i2.User?>.value(),
+          )
+          as _i6.Future<_i2.User?>);
+}
+
+/// A class which mocks [UpdateUserProfileUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUpdateUserProfileUseCase extends _i1.Mock
+    implements _i20.UpdateUserProfileUseCase {
+  MockUpdateUserProfileUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.ProfileRepository get repository =>
+      (super.noSuchMethod(
+            Invocation.getter(#repository),
+            returnValue: _FakeProfileRepository_8(
+              this,
+              Invocation.getter(#repository),
+            ),
+          )
+          as _i5.ProfileRepository);
+
+  @override
+  _i6.Future<_i2.User> call(_i2.User? user) =>
+      (super.noSuchMethod(
+            Invocation.method(#call, [user]),
+            returnValue: _i6.Future<_i2.User>.value(
+              _FakeUser_0(this, Invocation.method(#call, [user])),
+            ),
+          )
+          as _i6.Future<_i2.User>);
+}
+
+/// A class which mocks [AddAddressToProfileUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAddAddressToProfileUseCase extends _i1.Mock
+    implements _i21.AddAddressToProfileUseCase {
+  MockAddAddressToProfileUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.ProfileRepository get repository =>
+      (super.noSuchMethod(
+            Invocation.getter(#repository),
+            returnValue: _FakeProfileRepository_8(
+              this,
+              Invocation.getter(#repository),
+            ),
+          )
+          as _i5.ProfileRepository);
+
+  @override
+  _i6.Future<_i2.User> call({
+    required String? country,
+    required String? state,
+    required String? city,
+    String? streetAddress,
+    bool? setAsDefault,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#call, [], {
+              #country: country,
+              #state: state,
+              #city: city,
+              #streetAddress: streetAddress,
+              #setAsDefault: setAsDefault,
+            }),
+            returnValue: _i6.Future<_i2.User>.value(
+              _FakeUser_0(
+                this,
+                Invocation.method(#call, [], {
+                  #country: country,
+                  #state: state,
+                  #city: city,
+                  #streetAddress: streetAddress,
+                  #setAsDefault: setAsDefault,
+                }),
+              ),
+            ),
+          )
+          as _i6.Future<_i2.User>);
+}
+
+/// A class which mocks [RefreshProfileUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRefreshProfileUseCase extends _i1.Mock
+    implements _i22.RefreshProfileUseCase {
+  MockRefreshProfileUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.ProfileRepository get repository =>
+      (super.noSuchMethod(
+            Invocation.getter(#repository),
+            returnValue: _FakeProfileRepository_8(
+              this,
+              Invocation.getter(#repository),
+            ),
+          )
+          as _i5.ProfileRepository);
+
+  @override
+  _i6.Future<_i2.User?> call() =>
+      (super.noSuchMethod(
+            Invocation.method(#call, []),
+            returnValue: _i6.Future<_i2.User?>.value(),
+          )
+          as _i6.Future<_i2.User?>);
 }
